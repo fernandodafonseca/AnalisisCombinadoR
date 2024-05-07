@@ -26,7 +26,7 @@ analisis_combinado_DCA(
 - 2: Con estructura de varianza heterogénea.}
 }
 \value{
-Devuelve un objeto de clase 'anova' con los resultados del análisis combinado.
+Devuelve el modelo ajustado e imprime en pantalla el ANOVA correspondiente a dicho modelo.
 }
 \description{
 Esta función realiza un análisis combinado de datos para un Diseño Completamente Aleatorizado (DCA) utilizando modelos lineales mixtos.

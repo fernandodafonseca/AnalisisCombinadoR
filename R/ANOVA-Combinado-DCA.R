@@ -11,7 +11,7 @@
 #'                      - 1: Sin estructura de varianza heterogénea.
 #'                      - 2: Con estructura de varianza heterogénea.
 #'
-#' @return Devuelve un objeto de clase 'anova' con los resultados del análisis combinado.
+#' @return Devuelve el modelo ajustado e imprime en pantalla el ANOVA correspondiente a dicho modelo.
 #'
 #'
 #' @examples
@@ -73,5 +73,6 @@ analisis_combinado_DCA <- function(datos, nombre_var_resp, nombre_tratamiento, n
 
   anova_resultados <-anova_resultados[-1, ]
   # Devolver los resultados del analisis combinado
-  return(anova_resultados)
+  print(anova_resultados)
+  return(invisible(modelo))
 }
