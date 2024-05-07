@@ -49,7 +49,7 @@ graficos_residuales_qqnorm <- function(ANOVA_ind, tipo_visualizacion) {
       qqnorm(residuals(modelo), main = entorno,
              cex.lab = 0.9, cex.main = 1.7, cex.sub = 1.2, font.main = 1, font.sub = 1,
              col.lab = "black", fg = "blue",
-             xlab = "Cantidad normal estandar", ylab = "Residuales",
+             xlab = "Cuantil normal estandar", ylab = "Residuales",
              pch = 21, cex = 1, bg = "green", col = "black")
 
       # Agrego linea qqline con color rojo
@@ -63,7 +63,7 @@ graficos_residuales_qqnorm <- function(ANOVA_ind, tipo_visualizacion) {
       qqnorm(residuals(modelo), main = entorno,
              cex.lab = 0.9, cex.main = 1.7, cex.sub = 1.2, font.main = 1, font.sub = 1,
              col.lab = "black", fg = "blue",
-             xlab = "Cantidad normal estandar", ylab = "Residuales",
+             xlab = "Cuantil normal estandar", ylab = "Residuales",
              pch = 21, cex = 1, bg = "green", col = "black")
 
       # Agrego linea qqline con color rojo
