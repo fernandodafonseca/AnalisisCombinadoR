@@ -96,5 +96,6 @@ analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
   }
   anova_resultados <-anova_resultados[-1, ]
   # Devolver los resultados del analisis combinado
-  return(anova_resultados)
+  print(anova_resultados)
+  return(invisible(modelo))
 }
