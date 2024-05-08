@@ -21,13 +21,13 @@
 #'
 #' @examples
 #' # Ejemplo 1: Generar gráfico tipo 1
-#' # graficos_residuales_homogenidad(ANOVA_ind = resultado_ANOVA, tipo_de_graficos = 1)
+#' # graficos_residuales_homogeneidad(ANOVA_ind = resultado_ANOVA, tipo_de_graficos = 1)
 #'
 #' # Ejemplo 2: Generar gráfico tipo 2
-#' # graficos_residuales_homogenidad(ANOVA_ind = resultado_ANOVA, tipo_de_graficos = 2)
+#' # graficos_residuales_homogeneidad(ANOVA_ind = resultado_ANOVA, tipo_de_graficos = 2)
 #'
 #' @export
-graficos_residuales_homogenidad <- function(ANOVA_ind, tipo_de_graficos) {
+graficos_residuales_homogeneidad <- function(ANOVA_ind, tipo_de_graficos) {
 
   # Obtener los nombres de todos los entornos en la lista de modelos
   entornos <- names(ANOVA_ind$modelos)
