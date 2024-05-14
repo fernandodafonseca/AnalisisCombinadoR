@@ -52,8 +52,6 @@ analisis_combinado_DCA <- function(datos, nombre_var_resp, nombre_tratamiento, n
   datos$tratamiento <- factor(datos$tratamiento)
   datos$entorno <- factor(datos$entorno)
 
-   # ESTOY HACIENDO ESTA PARTE!
-
    # Ajustar el modelo lineal mixto
   if (tipo_varianza == 1) {
     # Sin estructura de varianza heterogenea
