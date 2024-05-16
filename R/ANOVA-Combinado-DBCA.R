@@ -26,25 +26,26 @@
 #' @export
 
 analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombre_tratamiento, nombre_entornos, tipo_varianza, efecto_bloque) {
+  library(nlme)
 
   # Obtener los nombres originales de las columnas
   nombres_originales <- names(datos)
 
-  # Verificar si los nombres de las columnas solicitadas estan presentes en los datos
+  # Verificar si los nombres de las columnas solicitadas están presentes en los datos
   if (!(nombre_bloque %in% nombres_originales)) {
-    stop("El nombre del bloque no se encontro en los datos.")
+    stop("El nombre del bloque no se encontró en los datos.")
   }
 
   if (!(nombre_var_resp %in% nombres_originales)) {
-    stop("El nombre de la variable respuesta no se encontro en los datos.")
+    stop("El nombre de la variable respuesta no se encontró en los datos.")
   }
 
   if (!(nombre_tratamiento %in% nombres_originales)) {
-    stop("El nombre del tratamiento no se encontro en los datos.")
+    stop("El nombre del tratamiento no se encontró en los datos.")
   }
 
   if (!(nombre_entornos %in% nombres_originales)) {
-    stop("El nombre del entorno no se encontro en los datos.")
+    stop("El nombre del entorno no se encontró en los datos.")
   }
 
   # Renombrar las columnas
@@ -61,62 +62,64 @@ analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
   datos$BxS <- paste(datos$bloque, datos$entorno, sep = "_")
 
   # Ajustar el modelo lineal mixto
-  if (tipo_varianza == 1) {  # ASUME HOMOGENIDAD DE VARIANZAS
-    if (efecto_bloque == 1) { # ASUME BLOQUES ALEATORIOS
+  if (tipo_varianza == 1) {     # ASUME HOMOGENIDAD DE VARIANZAS
 
-    modelo <- lme(var_resp ~ tratamiento + entorno + entorno:tratamiento, random = ~ 1|BxS, data = datos)
+    if (efecto_bloque == 1) {   # ASUME BLOQUES ALEATORIOS
 
-    } else if (efecto_bloque == 2) { # ASUME BLOQUES FIJOS
+      modelo <- lme(var_resp ~ tratamiento + entorno + entorno:tratamiento, random = ~ 1|BxS, data = datos)
+      anova_resultados <- anova(modelo)
 
-    modelo <-  lm(var_resp ~ tratamiento + entorno + bloque%in%entorno + entorno:tratamiento, data = datos)
-
-    }else {
-      stop("El tipo de efecto para el bloque no es valido. Debe ser 1 (aleatorio) o 2 (fijo).")
-    }
-    } else if (tipo_varianza == 2) { # ASUME VARIANZAS HETEROGENEAS
-      if (efecto_bloque == 1) {  # ASUME BLOQUES ALEATORIOS
-
-    modelo <- lme(var_resp ~ tratamiento + entorno + entorno:tratamiento, random = ~ 1|BxS, data = datos, weights = varIdent(form = ~1|entorno))
+      nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
+      row.names(anova_resultados) <- c("",nombre_tratamiento,nombre_entornos,nombre_interaccion)
+      anova_resultados <-anova_resultados[-1, ]
 
     } else if (efecto_bloque == 2) {  # ASUME BLOQUES FIJOS
 
-    modelo <- gls(var_resp ~ tratamiento + entorno + bloque + entorno:tratamiento, data = datos, weights = varIdent(form = ~1|entorno))
+      modelo <- lm(var_resp ~ tratamiento + entorno + bloque%in%entorno + entorno:tratamiento, data = datos)
+      anova_resultados <- anova(modelo)
 
-    }else {
-        stop("El tipo de efecto para el bloque no es valido. Debe ser 1 (aleatorio) o 2 (fijo).")
-    }
-    } else {
-    stop("El tipo de analisis especificado no es valido. Debe ser 1 o 2.")
-  }
+      nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
+      nombre_bloqueINentorno <- paste(nombre_entornos,nombre_bloque, sep=":")
+      row.names(anova_resultados) <- c(nombre_tratamiento,nombre_entornos,nombre_bloqueINentorno,nombre_interaccion,"Residuals")
 
-  # Realizar el analisis de varianza (ANOVA) del modelo combinado
-  anova_resultados <- anova(modelo)
-
-  if (efecto_bloque == 1) { # ASUME BLOQUES ALEATORIOS (ajustado con lme)
-  #MODIFICA NOMBRE DE LA SALIDA
-  nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
-  row.names(anova_resultados) <- c("",nombre_tratamiento,nombre_entornos,nombre_interaccion)
-
-  } else if (efecto_bloque == 2) { # ASUME BLOQUES FIJOS (ajustado con lm o gls)
-    #MODIFICA NOMBRES Y CALCULA LA F DE ENTORNOS SEGUN Mcintosh.
-
-    nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
-    nombre_bloqueINentorno <- paste(nombre_entornos,nombre_bloque, sep=":")
-    row.names(anova_resultados) <- c(nombre_tratamiento,nombre_entornos,nombre_bloqueINentorno,nombre_interaccion,"Residuals")
-
-    if (tipo_varianza == 1) {
-      #Ajusto con lm
       anova_resultados[2,4] <- anova_resultados[2,3]/anova_resultados[3,3]
       anova_resultados[2,5] <- pf(anova_resultados[2,3]/anova_resultados[3,3],df1 = anova_resultados[2,1], df2 = anova_resultados[3,1],lower.tail=FALSE)
 
-    } else if (tipo_varianza == 2) {
-
-      #Ajusto con gls
-
+    }else {
+      stop("El tipo de efecto para el bloque no es válido. Debe ser 1 (aleatorio) o 2 (fijo).")
     }
+  } else if (tipo_varianza == 2) {    # ASUME VARIANZAS HETEROGENEAS
+
+    if (efecto_bloque == 1) {         # ASUME BLOQUES ALEATORIOS
+
+      modelo <- lme(var_resp ~ tratamiento + entorno + entorno:tratamiento, random = ~ 1|BxS, data = datos, weights = varIdent(form = ~1|entorno))
+      anova_resultados <- anova(modelo)
+
+      nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
+      row.names(anova_resultados) <- c("",nombre_tratamiento,nombre_entornos,nombre_interaccion)
+      anova_resultados <-anova_resultados[-1, ]
+
+    } else if (efecto_bloque == 2) {    # ASUME BLOQUES FIJOS
+
+      modelo <- gls(var_resp ~ tratamiento + entorno + bloque%in%entorno + entorno:tratamiento, data = datos, weights = varIdent(form = ~1|entorno))
+      anova_resultados <- anova(modelo)
+
+      nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
+      nombre_bloqueINentorno <- paste(nombre_entornos,nombre_bloque, sep=":")
+      row.names(anova_resultados) <- c(nombre_tratamiento,nombre_entornos,nombre_bloqueINentorno,nombre_interaccion,"Residuals")
+
+      #ESTAS LINEAS SOLO FUNCIONAN EN EL AJUSTE CON GLS. VER COMO ACCEDER A LOS CM CUANDO AJUSTO CON GLS.
+      #anova_resultados[2,4] <- anova_resultados[2,3]/anova_resultados[3,3]
+      #anova_resultados[2,5] <- pf(anova_resultados[2,3]/anova_resultados[3,3],df1 = anova_resultados[2,1], df2 = anova_resultados[3,1],lower.tail=FALSE)
+
+    }else {
+      stop("El tipo de efecto para el bloque no es válido. Debe ser 1 (aleatorio) o 2 (fijo).")
+    }
+  } else {
+    stop("El tipo de análisis especificado no es válido. Debe ser 1 o 2.")
   }
-  # anova_resultados <-anova_resultados[-1, ]
-  # Devolver los resultados del analisis combinado
+
+  # Devolver los resultados del análisis combinado
   print(anova_resultados)
   return(invisible(modelo))
 }
