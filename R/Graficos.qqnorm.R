@@ -1,32 +1,31 @@
-#' Genera gráficos para verificar el supuesto de normalidad de los residuos.
+#' Genera graficos para verificar el supuesto de normalidad de los residuos.
 #'
-#' Esta función genera gráficos Q-Q (quantile-quantile) para cada entorno,
-#' permitiendo visualizar la distribución de los residuos y compararla con
-#' una distribución normal teórica.
+#' Esta funcion genera graficos Q-Q (quantile-quantile) para cada entorno,
+#' permitiendo visualizar la distribucion de los residuos y compararla con
+#' una distribucion normal teorica.
 #'
 #' @param ANOVA_ind Lista de modelos ANOVA individuales.
-#'        Esta lista debe ser el resultado de la función ANOVA.individuales.DBCA
+#'        Esta lista debe ser el resultado de la funcion ANOVA.individuales.DBCA
 #'        o ANOVA.individuales.DCA.
 #'
-#' @param tipo_visualizacion Tipo de visualización de los gráficos.
-#'        Debe ser un valor entero entre 1 y 2:
-#'        - 1: Gráficos en cuadrícula.
-#'        - 2: Gráficos en ventanas individuales.
-#'        Si se proporciona un valor diferente a 1 o 2, la función detendrá
-#'        la ejecución y devolverá un mensaje de error.
+#' @param tipo_visualizacion Tipo de visualizacion de los graficos.
+#'        Debe ser un valor entero entre 1 , 2 , 3:
+#'        - 1: Graficos en cuadricula.
+#'        - 2: Graficos en ventanas individuales.
+#'        - 3: Grafico, todos los entornos en un grafico.
 #'
-#' @return La función devuelve los gráficos especificados según el tipo de
-#'         visualización seleccionado.
+#' @return La funcion devuelve los graficos especificados segun el tipo de
+#'         visualizacion seleccionado.
 #'
 #' @importFrom stats qqline qqnorm
 #' @importFrom graphics plot abline
 #' @importFrom grDevices dev.new
 #'
 #' @examples
-#' # Ejemplo 1: Generar gráfico tipo 1
+#' # Ejemplo 1: Generar grafico tipo 1
 #' # graficos_residuales_qqnorm(resultado_ANOVA, tipo_visualizacion = 1)
 #'
-#' # Ejemplo 2: Generar gráfico tipo 2
+#' # Ejemplo 2: Generar grafico tipo 2
 #' # graficos_residuales_qqnorm(resultado_ANOVA, tipo_visualizacion = 2)
 #'
 #' @export
@@ -69,7 +68,25 @@ graficos_residuales_qqnorm <- function(ANOVA_ind, tipo_visualizacion) {
       # Agrego linea qqline con color rojo
       qqline(residuals(modelo), col = "red")
     }
+
+  } else if (tipo_visualizacion == 3) {
+    todos <- NULL
+    # Combino los residuos de todos los entornos
+    for (entorno in entornos) {
+      modelo <- ANOVA_ind$modelos[[entorno]]
+      residuos_modelo <- residuals(modelo)
+      todos[[entorno]] <- residuos_modelo
+    }
+    dev.new()
+    residuos_combinados <- unlist(todos)
+    qqnorm(unlist(residuos_combinados), main = "QQ Norm - Todos los Entornos",
+           cex.lab = 0.9, cex.main = 1.7, cex.sub = 1.2, font.main = 1, font.sub = 1,
+           col.lab = "black", fg = "blue",
+           xlab = "Cantidad normal estandar", ylab = "Residuales",
+           pch = 21, cex = 1, bg = "green", col = "black")
+
+    qqline(residuos_combinados, col = "red")
   } else {
-    stop("El tipo de visualizacion especificado no es valido. Debe ser 1 o 2.")
+    stop("El tipo de visualizacion especificado no es valido. Debe ser 1 o 2 O 3.")
   }
 }

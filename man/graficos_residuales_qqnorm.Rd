@@ -2,36 +2,35 @@
 % Please edit documentation in R/Graficos.qqnorm.R
 \name{graficos_residuales_qqnorm}
 \alias{graficos_residuales_qqnorm}
-\title{Genera gráficos para verificar el supuesto de normalidad de los residuos.}
+\title{Genera graficos para verificar el supuesto de normalidad de los residuos.}
 \usage{
 graficos_residuales_qqnorm(ANOVA_ind, tipo_visualizacion)
 }
 \arguments{
 \item{ANOVA_ind}{Lista de modelos ANOVA individuales.
-Esta lista debe ser el resultado de la función ANOVA.individuales.DBCA
+Esta lista debe ser el resultado de la funcion ANOVA.individuales.DBCA
 o ANOVA.individuales.DCA.}
 
-\item{tipo_visualizacion}{Tipo de visualización de los gráficos.
-Debe ser un valor entero entre 1 y 2:
-- 1: Gráficos en cuadrícula.
-- 2: Gráficos en ventanas individuales.
-Si se proporciona un valor diferente a 1 o 2, la función detendrá
-la ejecución y devolverá un mensaje de error.}
+\item{tipo_visualizacion}{Tipo de visualizacion de los graficos.
+Debe ser un valor entero entre 1 , 2 , 3:
+- 1: Graficos en cuadricula.
+- 2: Graficos en ventanas individuales.
+- 3: Grafico, todos los entornos en un grafico.}
 }
 \value{
-La función devuelve los gráficos especificados según el tipo de
-visualización seleccionado.
+La funcion devuelve los graficos especificados segun el tipo de
+visualizacion seleccionado.
 }
 \description{
-Esta función genera gráficos Q-Q (quantile-quantile) para cada entorno,
-permitiendo visualizar la distribución de los residuos y compararla con
-una distribución normal teórica.
+Esta funcion genera graficos Q-Q (quantile-quantile) para cada entorno,
+permitiendo visualizar la distribucion de los residuos y compararla con
+una distribucion normal teorica.
 }
 \examples{
-# Ejemplo 1: Generar gráfico tipo 1
+# Ejemplo 1: Generar grafico tipo 1
 # graficos_residuales_qqnorm(resultado_ANOVA, tipo_visualizacion = 1)
 
-# Ejemplo 2: Generar gráfico tipo 2
+# Ejemplo 2: Generar grafico tipo 2
 # graficos_residuales_qqnorm(resultado_ANOVA, tipo_visualizacion = 2)
 
 }
