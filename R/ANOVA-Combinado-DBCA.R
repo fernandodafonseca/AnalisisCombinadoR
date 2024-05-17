@@ -26,26 +26,25 @@
 #' @export
 
 analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombre_tratamiento, nombre_entornos, tipo_varianza, efecto_bloque) {
-  library(nlme)
 
   # Obtener los nombres originales de las columnas
   nombres_originales <- names(datos)
 
-  # Verificar si los nombres de las columnas solicitadas están presentes en los datos
+  # Verificar si los nombres de las columnas solicitadas estan presentes en los datos
   if (!(nombre_bloque %in% nombres_originales)) {
-    stop("El nombre del bloque no se encontró en los datos.")
+    stop("El nombre del bloque no se encontro en los datos.")
   }
 
   if (!(nombre_var_resp %in% nombres_originales)) {
-    stop("El nombre de la variable respuesta no se encontró en los datos.")
+    stop("El nombre de la variable respuesta no se encontro en los datos.")
   }
 
   if (!(nombre_tratamiento %in% nombres_originales)) {
-    stop("El nombre del tratamiento no se encontró en los datos.")
+    stop("El nombre del tratamiento no se encontro en los datos.")
   }
 
   if (!(nombre_entornos %in% nombres_originales)) {
-    stop("El nombre del entorno no se encontró en los datos.")
+    stop("El nombre del entorno no se encontro en los datos.")
   }
 
   # Renombrar las columnas
@@ -86,7 +85,7 @@ analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
       anova_resultados[2,5] <- pf(anova_resultados[2,3]/anova_resultados[3,3],df1 = anova_resultados[2,1], df2 = anova_resultados[3,1],lower.tail=FALSE)
 
     }else {
-      stop("El tipo de efecto para el bloque no es válido. Debe ser 1 (aleatorio) o 2 (fijo).")
+      stop("El tipo de efecto para el bloque no es valido. Debe ser 1 (aleatorio) o 2 (fijo).")
     }
   } else if (tipo_varianza == 2) {    # ASUME VARIANZAS HETEROGENEAS
 
@@ -113,13 +112,13 @@ analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
       #anova_resultados[2,5] <- pf(anova_resultados[2,3]/anova_resultados[3,3],df1 = anova_resultados[2,1], df2 = anova_resultados[3,1],lower.tail=FALSE)
 
     }else {
-      stop("El tipo de efecto para el bloque no es válido. Debe ser 1 (aleatorio) o 2 (fijo).")
+      stop("El tipo de efecto para el bloque no es valido. Debe ser 1 (aleatorio) o 2 (fijo).")
     }
   } else {
-    stop("El tipo de análisis especificado no es válido. Debe ser 1 o 2.")
+    stop("El tipo de analisis especificado no es valido. Debe ser 1 o 2.")
   }
 
-  # Devolver los resultados del análisis combinado
+  # Devolver los resultados del analisis combinado
   print(anova_resultados)
   return(invisible(modelo))
 }
