@@ -67,5 +67,6 @@ ANOVA.individuales.DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
   }
 
   # Devolver los datos con las columnas renombradas, los resultados de ANOVA, los residuales de los modelos individuales y los modelos mismos
-  return(list(ANOVA = ANOVA_resultados, modelos = modelos))
+  print(ANOVA_resultados)
+  return(invisible(list(ANOVA = ANOVA_resultados, modelos = modelos)))
 }
