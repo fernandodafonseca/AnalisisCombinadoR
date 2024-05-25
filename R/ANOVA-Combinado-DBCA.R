@@ -102,14 +102,11 @@ analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
 
       modelo <- gls(var_resp ~ tratamiento + entorno + bloque%in%entorno + entorno:tratamiento, data = datos, weights = varIdent(form = ~1|entorno))
       anova_resultados <- anova(modelo)
+      anova_resultados <- anova_resultados[-1,]
 
       nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
       nombre_bloqueINentorno <- paste(nombre_entornos,nombre_bloque, sep=":")
       row.names(anova_resultados) <- c(nombre_tratamiento,nombre_entornos,nombre_bloqueINentorno,nombre_interaccion,"Residuals")
-
-      #ESTAS LINEAS SOLO FUNCIONAN EN EL AJUSTE CON GLS. VER COMO ACCEDER A LOS CM CUANDO AJUSTO CON GLS.
-      #anova_resultados[2,4] <- anova_resultados[2,3]/anova_resultados[3,3]
-      #anova_resultados[2,5] <- pf(anova_resultados[2,3]/anova_resultados[3,3],df1 = anova_resultados[2,1], df2 = anova_resultados[3,1],lower.tail=FALSE)
 
     }else {
       stop("El tipo de efecto para el bloque no es valido. Debe ser 1 (aleatorio) o 2 (fijo).")
