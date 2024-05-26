@@ -104,9 +104,9 @@ analisis_combinado_DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
       anova_resultados <- anova(modelo)
       anova_resultados <- anova_resultados[-1,]
 
-      nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
-      nombre_bloqueINentorno <- paste(nombre_entornos,nombre_bloque, sep=":")
-      row.names(anova_resultados) <- c(nombre_tratamiento,nombre_entornos,nombre_bloqueINentorno,nombre_interaccion,"Residuals")
+      #nombre_interaccion <- paste(nombre_tratamiento,nombre_entornos, sep=":")
+      #nombre_bloqueINentorno <- paste(nombre_entornos,nombre_bloque, sep=":")
+      #row.names(anova_resultados) <- c(nombre_tratamiento,nombre_entornos,nombre_bloqueINentorno,nombre_interaccion,"Residuals")
 
     }else {
       stop("El tipo de efecto para el bloque no es valido. Debe ser 1 (aleatorio) o 2 (fijo).")
