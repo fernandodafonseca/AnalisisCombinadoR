@@ -19,6 +19,9 @@
 #' @export
 ANOVA.individuales.DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombre_tratamiento, nombre_entorno) {
 
+  # Obtener el nombre original de la variable respuesta
+  nombre_var_resp_original <- nombre_var_resp
+
   # Obtener los nombres originales de las columnas
   nombres_originales <- names(datos)
 
@@ -39,6 +42,8 @@ ANOVA.individuales.DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
     stop("El nombre de la columna entornos no se encontro en los datos.")
   }
 
+  nombres_entornos_originales <- unique(datos[[nombre_entorno]])
+
   # Renombrar las columnas
   names(datos)[names(datos) == nombre_bloque] <- "bloque"
   names(datos)[names(datos) == nombre_var_resp] <- "var_resp"
@@ -50,20 +55,17 @@ ANOVA.individuales.DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
   datos$tratamiento <- factor(datos$tratamiento)
   datos$entornos <- as.factor(datos$entornos)
 
-  # Convertir los entornos a numerico y luego a factor para el bucle
-  numeros_entornos <- as.factor(as.numeric(datos$entornos))
-
   # Inicializar residuales_modelos como una lista vacia
   residuales_modelos <- list()
 
   # Bucle para realizar ANOVAs individuales para cada entorno
   ANOVA_resultados <- list()
   modelos <- list()
-  for (i in unique(numeros_entornos)) {
-    modelo <- lm(var_resp ~ bloque + tratamiento, subset(datos, numeros_entornos == i))
-    ANOVA_resultados[[paste("Entorno", i)]] <- anova(modelo)
-    modelos[[paste("Entorno", i)]] <- modelo
-    row.names(ANOVA_resultados[[paste("Entorno", i)]]) <- c (nombre_bloque,nombre_tratamiento,"Residual")
+  for (i in nombres_entornos_originales) {
+    modelo <- lm(var_resp ~ bloque + tratamiento, data = datos[datos$entornos == i, ])
+    ANOVA_resultados[[i]] <- anova(modelo)
+    modelos[[i]] <- modelo
+    row.names(ANOVA_resultados[[i]]) <- c (nombre_bloque,nombre_tratamiento,"Residual")
   }
 
   # Devolver los datos con las columnas renombradas, los resultados de ANOVA, los residuales de los modelos individuales y los modelos mismos

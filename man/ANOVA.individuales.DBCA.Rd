@@ -2,7 +2,7 @@
 % Please edit documentation in R/ANOVA-Exp.individuales-DBCA.R
 \name{ANOVA.individuales.DBCA}
 \alias{ANOVA.individuales.DBCA}
-\title{Realiza análisis de varianza (ANOVA) para DBCA de forma individual para cada entorno en un conjunto de datos dado.}
+\title{Realiza analisis de varianza (ANOVA) para DBCA de forma individual para cada entorno en un conjunto de datos dado.}
 \usage{
 ANOVA.individuales.DBCA(
   datos,
@@ -27,7 +27,7 @@ ANOVA.individuales.DBCA(
 La función devuelve una lista denominada ANOVA.ind que contiene los resultados de ANOVA y los modelos de cada entorno.
 }
 \description{
-Realiza análisis de varianza (ANOVA) para DBCA de forma individual para cada entorno en un conjunto de datos dado.
+Realiza analisis de varianza (ANOVA) para DBCA de forma individual para cada entorno en un conjunto de datos dado.
 }
 \examples{
 # ANOVA.individuales.DBCA(datos = datos_ejemplo,
