@@ -1,4 +1,4 @@
-#' Realiza analisis de varianza (ANOVA) para DBCA de forma individual para cada entorno en un conjunto de datos dado.
+#' Realiza análisis de varianza -ANOVA- para DBCA de forma individual para cada entorno en un conjunto de datos.
 #'
 #' @param datos Nombre del conjunto de datos.
 #' @param nombre_bloque Nombre de la columna donde se encuentran los bloques.
@@ -19,27 +19,24 @@
 #' @export
 ANOVA.individuales.DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombre_tratamiento, nombre_entorno) {
 
-  # Obtener el nombre original de la variable respuesta
-  nombre_var_resp_original <- nombre_var_resp
-
   # Obtener los nombres originales de las columnas
   nombres_originales <- names(datos)
 
-  # Verificar si los nombres de las columnas solicitadas estan presentes en los datos
+  # Verificar si los nombres de las columnas solicitadas están presentes en los datos
   if (!(nombre_bloque %in% nombres_originales)) {
-    stop("El nombre de la columna bloque no se encontro en los datos.")
+    stop("El nombre de la columna bloque no se encontr\u00f3 en los datos.")
   }
 
   if (!(nombre_var_resp %in% nombres_originales)) {
-    stop("El nombre de la variable respuesta no se encontro en los datos.")
+    stop("El nombre de la variable respuesta no se encontr\u00f3 en los datos.")
   }
 
   if (!(nombre_tratamiento %in% nombres_originales)) {
-    stop("El nombre de la columna tratamiento no se encontro en los datos.")
+    stop("El nombre de la columna tratamiento no se encontr\u00f3 en los datos.")
   }
 
   if (!(nombre_entorno %in% nombres_originales)) {
-    stop("El nombre de la columna entornos no se encontro en los datos.")
+    stop("El nombre de la columna entornos no se encontr\u00f3 en los datos.")
   }
 
   nombres_entornos_originales <- unique(datos[[nombre_entorno]])
@@ -55,20 +52,30 @@ ANOVA.individuales.DBCA <- function(datos, nombre_bloque, nombre_var_resp, nombr
   datos$tratamiento <- factor(datos$tratamiento)
   datos$entornos <- as.factor(datos$entornos)
 
-  # Inicializar residuales_modelos como una lista vacia
-  residuales_modelos <- list()
-
-  # Bucle para realizar ANOVAs individuales para cada entorno
+  # Inicializar listas vacías para resultados y modelos
   ANOVA_resultados <- list()
   modelos <- list()
+
+  # Bucle para realizar ANOVAs individuales para cada entorno
   for (i in nombres_entornos_originales) {
-    modelo <- lm(var_resp ~ bloque + tratamiento, data = datos[datos$entornos == i, ])
-    ANOVA_resultados[[i]] <- anova(modelo)
-    modelos[[i]] <- modelo
-    row.names(ANOVA_resultados[[i]]) <- c (nombre_bloque,nombre_tratamiento,"Residual")
+    datos_sub <- datos[datos$entornos == i, ]
+    modelo <- with(datos_sub, lm(var_resp ~ bloque + tratamiento))
+    anova_result <- anova(modelo)
+
+    # Ajustar los nombres de las filas en los resultados de ANOVA
+    row.names(anova_result) <- c(nombre_bloque, nombre_tratamiento, "Residual")
+
+    # Cambiar el nombre de la columna "Response" en los resultados de ANOVA
+    attr(anova_result, "heading")[2] <- paste("Response:", nombre_var_resp)
+
+    # Almacenar los resultados utilizando el nombre del entorno original
+    ANOVA_resultados[[as.character(i)]] <- anova_result
+    modelos[[as.character(i)]] <- modelo
   }
 
-  # Devolver los datos con las columnas renombradas, los resultados de ANOVA, los residuales de los modelos individuales y los modelos mismos
+  # Imprimir los resultados
   print(ANOVA_resultados)
+
+  # Devolver los resultados con los nombres originales
   return(invisible(list(ANOVA = ANOVA_resultados, modelos = modelos)))
 }
