@@ -71,7 +71,7 @@ Puedes instalar la versión en desarrollo de AnalisisCombinadoR de la
 siguiente manera:
 
 ``` r
-# devtools::install_github("fernandodafonseca/AnalisisCombinadoR")
+remotes::install_github("fernandodafonseca/AnalisisCombinadoR")
 ```
 
 ## Ejemplos:
