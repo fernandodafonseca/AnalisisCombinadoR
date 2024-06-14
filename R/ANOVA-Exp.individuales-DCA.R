@@ -16,6 +16,7 @@
 #' @importFrom stats anova lm
 #' @export
 ANOVA.individuales.DCA <- function(datos, nombre_var_resp, nombre_tratamiento, nombre_entorno) {
+
   # Obtener los nombres originales de las columnas
   nombres_originales <- names(datos)
 
@@ -32,6 +33,8 @@ ANOVA.individuales.DCA <- function(datos, nombre_var_resp, nombre_tratamiento, n
     stop("El nombre de los entornos no se encontro en los datos.")
   }
 
+  nombres_entornos_originales <- unique(datos[[nombre_entorno]])
+
   # Renombrar las columnas
   names(datos)[names(datos) == nombre_var_resp] <- "var_resp"
   names(datos)[names(datos) == nombre_tratamiento] <- "tratamiento"
@@ -41,23 +44,30 @@ ANOVA.individuales.DCA <- function(datos, nombre_var_resp, nombre_tratamiento, n
   datos$tratamiento <- factor(datos$tratamiento)
   datos$entornos <- as.factor(datos$entornos)
 
-  # Convertir los entornos a numerico y luego a factor para el bucle
-  numeros_entornos <- as.factor(as.numeric(datos$entornos))
-
-  # Inicializar residuales_modelos como una lista vacia
-  residuales_modelos <- list()
-
-  # Bucle para realizar ANOVAs individuales para cada entorno
+  # Inicializar listas vacias para resultados y modelos
   ANOVA_resultados <- list()
   modelos <- list()
-  for (i in unique(numeros_entornos)) {
-    modelo <- lm(var_resp ~ tratamiento, subset(datos, numeros_entornos == i))
-    ANOVA_resultados[[paste("Entorno", i)]] <- anova(modelo)
-    modelos[[paste("Entorno", i)]] <- modelo
-    row.names(ANOVA_resultados[[paste("Entorno", i)]]) <- c (nombre_tratamiento,"Residuals")
+
+  # Bucle para realizar ANOVAs individuales para cada entorno
+  for (i in nombres_entornos_originales) {
+    datos_sub <- subset(datos, datos$entornos == i)
+    modelo <- lm(var_resp ~ tratamiento, data = datos_sub)
+    anova_result <- anova(modelo)
+
+    # Ajustar los nombres de las filas en los resultados de ANOVA
+    row.names(anova_result) <- c(nombre_tratamiento, "Residuals")
+
+    # Cambiar el nombre de la columna "Response" en los resultados de ANOVA
+    attr(anova_result, "heading")[2] <- paste("Response:", nombre_var_resp)
+
+    # Almacenar los resultados utilizando el nombre del entorno original
+    ANOVA_resultados[[as.character(i)]] <- anova_result
+    modelos[[as.character(i)]] <- modelo
   }
 
-  # Devolver los datos con las columnas renombradas, los resultados de ANOVA, los residuales de los modelos individuales y los modelos mismos
+  # Imprimir los resultados
   print(ANOVA_resultados)
+
+  # Devolver los resultados con los nombres originales
   return(invisible(list(ANOVA = ANOVA_resultados, modelos = modelos)))
 }
