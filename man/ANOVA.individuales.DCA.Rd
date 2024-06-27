@@ -2,7 +2,7 @@
 % Please edit documentation in R/ANOVA-Exp.individuales-DCA.R
 \name{ANOVA.individuales.DCA}
 \alias{ANOVA.individuales.DCA}
-\title{Realiza analisis de varianza (ANOVA) para DCA de forma individual para cada entorno en un conjunto de datos dado.}
+\title{#' Analisis de varianza individual para ensayos con DCA}
 \usage{
 ANOVA.individuales.DCA(
   datos,
@@ -24,7 +24,7 @@ ANOVA.individuales.DCA(
 La funcion devuelve una lista denominada ANOVA.ind que contiene los resultados de ANOVA y los modelos de cada entorno.
 }
 \description{
-Realiza analisis de varianza (ANOVA) para DCA de forma individual para cada entorno en un conjunto de datos dado.
+Realiza analisis de varianza (ANOVA) para DCA de forma individual para cada entorno en un conjunto de datos.
 }
 \examples{
 # ANOVA.individuales.DCA(datos = datos_ejemplo,

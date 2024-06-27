@@ -1,5 +1,8 @@
 #' Analisis combinado (efectos fijos)
 #'
+#' Funcion desarrollada a partir de lo expuesto por McIntosh, M. S. (1983).
+#' Analysis of combined experiments.Agronomy Journal, 75(1), 153-155.
+#'
 #' @param datos Un dataframe que contiene los datos.
 #' @param varresp El nombre, entre comillas (""), de la columna que representa la variable respuesta.
 #' @param bloques El nombre, entre comillas (""), de la columna que representa los bloques.

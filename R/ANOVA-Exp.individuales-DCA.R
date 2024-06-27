@@ -1,4 +1,6 @@
-#' Realiza analisis de varianza (ANOVA) para DCA de forma individual para cada entorno en un conjunto de datos dado.
+#'#' Analisis de varianza individual para ensayos con DCA
+#'
+#' Realiza analisis de varianza (ANOVA) para DCA de forma individual para cada entorno en un conjunto de datos.
 #'
 #' @param datos Nombre del conjunto de datos.
 #' @param nombre_var_resp Nombre, entre comillas (""), de la columna donde se encuentran la variable respuesta.

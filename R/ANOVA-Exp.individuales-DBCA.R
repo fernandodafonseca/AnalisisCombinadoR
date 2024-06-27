@@ -1,4 +1,6 @@
-#' Realiza análisis de varianza -ANOVA- para DBCA de forma individual para cada entorno en un conjunto de datos.
+#' Analisis de varianza individual para ensayos con DBCA
+#'
+#' Realiza análisis de varianza (ANOVA) para DBCA de forma individual para cada entorno en un conjunto de datos.
 #'
 #' @param datos Nombre del conjunto de datos.
 #' @param nombre_bloque Nombre, entre comillas (""), de la columna donde se encuentran los bloques.

@@ -21,7 +21,8 @@ efectos_fijos(datos, varresp, bloques, entornos, tratamiento)
 Un dataframe con los resultados del analisis de efectos fijos.
 }
 \description{
-Analisis combinado (efectos fijos)
+Funcion desarrollada a partir de lo expuesto por McIntosh, M. S. (1983).
+Analysis of combined experiments.Agronomy Journal, 75(1), 153-155.
 }
 \examples{
 #datos <- read.csv("datos.csv")
