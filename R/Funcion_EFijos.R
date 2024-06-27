@@ -1,10 +1,10 @@
 #' Analisis combinado (efectos fijos)
 #'
 #' @param datos Un dataframe que contiene los datos.
-#' @param varresp El nombre de la columna que representa la variable respuesta.
-#' @param bloques El nombre de la columna que representa los bloques.
-#' @param entornos El nombre de la columna que representa los entornos.
-#' @param tratamiento El nombre de la columna que representa los tratamientos.
+#' @param varresp El nombre, entre comillas (""), de la columna que representa la variable respuesta.
+#' @param bloques El nombre, entre comillas (""), de la columna que representa los bloques.
+#' @param entornos El nombre, entre comillas (""), de la columna que representa los entornos.
+#' @param tratamiento El nombre, entre comillas (""), de la columna que representa los tratamientos.
 #'
 #' @return Un dataframe con los resultados del analisis de efectos fijos.
 #'

@@ -15,11 +15,11 @@ analisis_combinado_DCA(
 \arguments{
 \item{datos}{Un dataframe que contiene los datos del experimento.}
 
-\item{nombre_var_resp}{El nombre de la columna que contiene la variable respuesta.}
+\item{nombre_var_resp}{El nombre, entre comillas (""), de la columna que contiene la variable respuesta.}
 
-\item{nombre_tratamiento}{El nombre de la columna que contiene los tratamientos.}
+\item{nombre_tratamiento}{El nombre, entre comillas (""), de la columna que contiene los tratamientos.}
 
-\item{nombre_entornos}{El nombre de la columna que contiene los entornos.}
+\item{nombre_entornos}{El nombre, entre comillas (""), de la columna que contiene los entornos.}
 
 \item{tipo_varianza}{Un entero que especifica el tipo de estructura de varianza a utilizar:
 - 1: Sin estructura de varianza heterogénea.

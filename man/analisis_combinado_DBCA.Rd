@@ -17,17 +17,17 @@ analisis_combinado_DBCA(
 \arguments{
 \item{datos}{Un dataframe que contiene los datos del experimento.}
 
-\item{nombre_bloque}{El nombre de la columna que contiene la variable de bloque.}
+\item{nombre_bloque}{El nombre, entre comillas(""), de la columna que contiene la variable de bloque.}
 
-\item{nombre_var_resp}{El nombre de la columna que contiene la variable respuesta.}
+\item{nombre_var_resp}{El nombre, entre comillas(""), de la columna que contiene la variable respuesta.}
 
-\item{nombre_tratamiento}{El nombre de la columna que contiene la variable de tratamiento.}
+\item{nombre_tratamiento}{El nombre, entre comillas(""), de la columna que contiene la variable de tratamiento.}
 
-\item{nombre_entornos}{El nombre de la columna que contiene la variable de entorno.}
+\item{nombre_entornos}{El nombre, entre comillas(""), de la columna que contiene la variable de entorno.}
 
-\item{tipo_varianza}{Un entero que indica el tipo de estructura de varianza. 1 para homogeneidad y 2 para heterogeneidad.}
+\item{tipo_varianza}{Un numero entero que indica el tipo de estructura de varianza. 1 para homogeneidad y 2 para heterogeneidad.}
 
-\item{efecto_bloque}{Un entero que indica el tipo de efecto del bloque en el modelo. 1 para aleatorio y 2 para fijo.}
+\item{efecto_bloque}{Un numero entero que indica el tipo de efecto del bloque en el modelo. 1 para aleatorio y 2 para fijo.}
 }
 \value{
 Un dataframe con los resultados del analisis combinado de varianza.

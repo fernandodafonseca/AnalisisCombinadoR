@@ -1,10 +1,10 @@
 #' Realiza análisis de varianza -ANOVA- para DBCA de forma individual para cada entorno en un conjunto de datos.
 #'
 #' @param datos Nombre del conjunto de datos.
-#' @param nombre_bloque Nombre de la columna donde se encuentran los bloques.
-#' @param nombre_var_resp Nombre de la columna donde se encuentran la variable respuesta.
-#' @param nombre_tratamiento Nombre de la columna donde se encuentran los tratamientos.
-#' @param nombre_entorno Nombre de la columna donde se encuentran los entornos.
+#' @param nombre_bloque Nombre, entre comillas (""), de la columna donde se encuentran los bloques.
+#' @param nombre_var_resp Nombre, entre comillas (""), de la columna donde se encuentran la variable respuesta.
+#' @param nombre_tratamiento Nombre, entre comillas (""), de la columna donde se encuentran los tratamientos.
+#' @param nombre_entorno Nombre, entre comillas (""), de la columna donde se encuentran los entornos.
 #'
 #' @return La función devuelve una lista denominada ANOVA.ind que contiene los resultados de ANOVA y los modelos de cada entorno.
 #'

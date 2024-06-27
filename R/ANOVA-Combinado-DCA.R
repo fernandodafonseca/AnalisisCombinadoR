@@ -4,9 +4,9 @@
 #' Permite ajustar modelos con o sin estructura de varianza heterogénea entre los entornos.
 #'
 #' @param datos Un dataframe que contiene los datos del experimento.
-#' @param nombre_var_resp El nombre de la columna que contiene la variable respuesta.
-#' @param nombre_tratamiento El nombre de la columna que contiene los tratamientos.
-#' @param nombre_entornos El nombre de la columna que contiene los entornos.
+#' @param nombre_var_resp El nombre, entre comillas (""), de la columna que contiene la variable respuesta.
+#' @param nombre_tratamiento El nombre, entre comillas (""), de la columna que contiene los tratamientos.
+#' @param nombre_entornos El nombre, entre comillas (""), de la columna que contiene los entornos.
 #' @param tipo_varianza Un entero que especifica el tipo de estructura de varianza a utilizar:
 #'                      - 1: Sin estructura de varianza heterogénea.
 #'                      - 2: Con estructura de varianza heterogénea.

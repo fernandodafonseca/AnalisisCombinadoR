@@ -9,13 +9,13 @@ efectos_fijos(datos, varresp, bloques, entornos, tratamiento)
 \arguments{
 \item{datos}{Un dataframe que contiene los datos.}
 
-\item{varresp}{El nombre de la columna que representa la variable respuesta.}
+\item{varresp}{El nombre, entre comillas (""), de la columna que representa la variable respuesta.}
 
-\item{bloques}{El nombre de la columna que representa los bloques.}
+\item{bloques}{El nombre, entre comillas (""), de la columna que representa los bloques.}
 
-\item{entornos}{El nombre de la columna que representa los entornos.}
+\item{entornos}{El nombre, entre comillas (""), de la columna que representa los entornos.}
 
-\item{tratamiento}{El nombre de la columna que representa los tratamientos.}
+\item{tratamiento}{El nombre, entre comillas (""), de la columna que representa los tratamientos.}
 }
 \value{
 Un dataframe con los resultados del analisis de efectos fijos.

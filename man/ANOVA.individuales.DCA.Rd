@@ -14,11 +14,11 @@ ANOVA.individuales.DCA(
 \arguments{
 \item{datos}{Nombre del conjunto de datos.}
 
-\item{nombre_var_resp}{Nombre de la columna donde se encuentran la variable respuesta.}
+\item{nombre_var_resp}{Nombre, entre comillas (""), de la columna donde se encuentran la variable respuesta.}
 
-\item{nombre_tratamiento}{Nombre de la columna donde se encuentran los tratamientos.}
+\item{nombre_tratamiento}{Nombre, entre comillas (""), de la columna donde se encuentran los tratamientos.}
 
-\item{nombre_entorno}{Nombre de la columna donde se encuentran los entornos.}
+\item{nombre_entorno}{Nombre, entre comillas (""), de la columna donde se encuentran los entornos.}
 }
 \value{
 La funcion devuelve una lista denominada ANOVA.ind que contiene los resultados de ANOVA y los modelos de cada entorno.
