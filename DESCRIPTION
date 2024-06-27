@@ -1,6 +1,6 @@
 Package: AnalisisCombinadoR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Analisis combinado de ensayos.
+Version: 1.0
 Authors@R: 
     person("Fernando José", "da Fonseca", , "fernandoj.dafonseca@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
