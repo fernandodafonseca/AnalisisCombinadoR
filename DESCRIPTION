@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Fernando José", "da Fonseca", , "fernandoj.dafonseca@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: La libreria contiene diversas funciones para realizar analisis combinado de ensayos. Ademas contiene funciones para analizar graficamente los supuestos de normalidad y homogeneidad de varianza. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
