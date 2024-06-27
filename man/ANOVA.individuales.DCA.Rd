@@ -2,7 +2,7 @@
 % Please edit documentation in R/ANOVA-Exp.individuales-DCA.R
 \name{ANOVA.individuales.DCA}
 \alias{ANOVA.individuales.DCA}
-\title{#' Analisis de varianza individual para ensayos con DCA}
+\title{Analisis de varianza individual para ensayos con DCA}
 \usage{
 ANOVA.individuales.DCA(
   datos,

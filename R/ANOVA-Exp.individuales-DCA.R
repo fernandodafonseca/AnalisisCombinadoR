@@ -1,4 +1,4 @@
-#'#' Analisis de varianza individual para ensayos con DCA
+#' Analisis de varianza individual para ensayos con DCA
 #'
 #' Realiza analisis de varianza (ANOVA) para DCA de forma individual para cada entorno en un conjunto de datos.
 #'
