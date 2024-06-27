@@ -6,5 +6,7 @@
 \title{AnalisisCombinadoR: Un paquete para análisis combinado de ensayos}
 \description{
 El paquete AnalisisCombinadoR proporciona diversas funciones para realizar
-análisis combinados de datos.
+análisis combinados de ensayos. Ademas contiene funciones para realizar la
+verificacion grafica de los supuestos de normalidad y de homogeneidad de
+de los residuos.
 }
