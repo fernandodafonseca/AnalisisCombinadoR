@@ -1,5 +1,5 @@
 Package: AnalisisCombinadoR
-Title: Analisis combinado de ensayos.
+Title: Analisis combinado de ensayos
 Version: 1.0
 Authors@R: 
     person("Fernando José", "da Fonseca", , "fernandoj.dafonseca@gmail.com", role = c("aut", "cre"),
